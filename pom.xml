@@ -18,6 +18,7 @@
 		<junit.version>4.11</junit.version>
 		<resteasy-jackson-provider.version>2.2.1.GA</resteasy-jackson-provider.version>
 		<resteasy-jaxrs.version>2.2.1.GA</resteasy-jaxrs.version>
+		<slf4j-simple.version>1.7.21</slf4j-simple.version>
 	</properties>
 
 	<build>
@@ -70,6 +71,11 @@
 				<groupId>org.jboss.resteasy</groupId>
 				<artifactId>resteasy-jackson-provider</artifactId>
 				<version>${resteasy-jackson-provider.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.slf4j</groupId>
+				<artifactId>slf4j-simple</artifactId>
+				<version>${slf4j-simple.version}</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>

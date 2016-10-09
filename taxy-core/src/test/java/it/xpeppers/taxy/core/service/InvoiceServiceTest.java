@@ -29,6 +29,8 @@ import java.util.List;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * Class <code>InvoiceServiceTest.java</code> is
@@ -40,6 +42,8 @@ import org.junit.Test;
 
 public class InvoiceServiceTest {
 
+	static final Logger LOG = LoggerFactory.getLogger(InvoiceServiceTest.class);
+	
 	InvoiceServiceImpl invoiceService = new InvoiceServiceImpl();
 
 	List<Product> shoppingBaskets1 = new ArrayList<>();
@@ -70,16 +74,16 @@ public class InvoiceServiceTest {
 	public void calculateInvoiceTest() {
 
 		// Calculate invoice for shopping baskets 1
-		Assert.assertTrue("Shopping Baskets 1 is empty", (shoppingBaskets1.isEmpty()));
-		System.out.println(invoiceService.calculateInvoice(shoppingBaskets1).toString());
+		Assert.assertTrue("Shopping Baskets 1 is empty", (!shoppingBaskets1.isEmpty()));
+		LOG.info("SHOPPING BASKET 1 :: {}",invoiceService.calculateInvoice(shoppingBaskets1));
 
 		// Calculate invoice for shopping baskets 2
-		Assert.assertTrue("Shopping Baskets 2 is empty", (shoppingBaskets2.isEmpty()));
-		System.out.println(invoiceService.calculateInvoice(shoppingBaskets2).toString());
+		Assert.assertTrue("Shopping Baskets 2 is empty", (!shoppingBaskets2.isEmpty()));
+		LOG.info("SHOPPING BASKET 2 :: {}", invoiceService.calculateInvoice(shoppingBaskets2));
 
 		// Calculate invoice for shopping baskets 3
-		Assert.assertTrue("Shopping Baskets 3 is empty", (shoppingBaskets3.isEmpty()));
-		System.out.println(invoiceService.calculateInvoice(shoppingBaskets3).toString());
+		Assert.assertTrue("Shopping Baskets 3 is empty", (!shoppingBaskets3.isEmpty()));
+		LOG.info("SHOPPING BASKET 3 :: {}", invoiceService.calculateInvoice(shoppingBaskets3));
 
 	}
 

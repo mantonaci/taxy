@@ -46,7 +46,7 @@ public class InvoiceServiceImpl implements InvoiceService {
 	public Invoice calculateInvoice(List<Product> products) {
 
 		Invoice invoice = new Invoice();
-		List<Product> productsInvoiced = new ArrayList<Product>();
+		List<Product> productsInvoiced = new ArrayList<>();
 		BigDecimal salesTax = new BigDecimal("0");
 		BigDecimal totalPrice = new BigDecimal("0");
 
@@ -91,8 +91,7 @@ public class InvoiceServiceImpl implements InvoiceService {
 	}
 
 	protected BigDecimal roundSaleTax(BigDecimal price) {
-		BigDecimal finalPrice = price.divide(ROUND_SCALE).setScale(0, BigDecimal.ROUND_UP).multiply(ROUND_SCALE);
-		return finalPrice;
+		return price.divide(ROUND_SCALE).setScale(0, BigDecimal.ROUND_UP).multiply(ROUND_SCALE);
 	}
 
 }
