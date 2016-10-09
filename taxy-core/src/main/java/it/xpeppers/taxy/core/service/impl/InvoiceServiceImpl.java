@@ -52,24 +52,24 @@ public class InvoiceServiceImpl implements InvoiceService {
 
 		for (Product product : products) {
 
-			BigDecimal finalPrice;
+			BigDecimal productFinalPrice;
 
 			if (!product.isImported() && product.getCategory().isTaxeable()) {
-				finalPrice = product.getPrice().add(calculateProductBasicSalesTax(product.getPrice()));
+				productFinalPrice = product.getPrice().add(calculateProductBasicSalesTax(product.getPrice()));
 			} else if (product.isImported() && product.getCategory().isTaxeable()) {
-				finalPrice = product.getPrice().add(
+				productFinalPrice = product.getPrice().add(
 					calculateProductBasicSalesTax(product.getPrice()).add(
 						calculateProductImportSalesTax(product.getPrice())));
 			} else if (product.isImported() && !product.getCategory().isTaxeable()) {
-				finalPrice = product.getPrice().add(calculateProductImportSalesTax(product.getPrice()));
+				productFinalPrice = product.getPrice().add(calculateProductImportSalesTax(product.getPrice()));
 			} else {
-				finalPrice = product.getPrice();
+				productFinalPrice = product.getPrice();
 			}
 
-			salesTax = salesTax.add(finalPrice.subtract(product.getPrice()));
-			totalPrice = totalPrice.add(finalPrice);
+			salesTax = salesTax.add(productFinalPrice.subtract(product.getPrice()));
+			totalPrice = totalPrice.add(productFinalPrice);
 
-			product.setTaxedPrice(finalPrice);
+			product.setTaxedPrice(productFinalPrice);
 			productsInvoiced.add(product);
 		}
 

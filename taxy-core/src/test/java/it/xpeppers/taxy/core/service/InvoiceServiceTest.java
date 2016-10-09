@@ -42,9 +42,9 @@ public class InvoiceServiceTest {
 
 	InvoiceServiceImpl invoiceService = new InvoiceServiceImpl();
 
-	List<Product> shoppingBaskets1 = new ArrayList<Product>();
-	List<Product> shoppingBaskets2 = new ArrayList<Product>();
-	List<Product> shoppingBaskets3 = new ArrayList<Product>();
+	List<Product> shoppingBaskets1 = new ArrayList<>();
+	List<Product> shoppingBaskets2 = new ArrayList<>();
+	List<Product> shoppingBaskets3 = new ArrayList<>();
 
 	@Before
 	public void init() {
@@ -70,15 +70,15 @@ public class InvoiceServiceTest {
 	public void calculateInvoiceTest() {
 
 		// Calculate invoice for shopping baskets 1
-		Assert.assertTrue("Shopping Baskets 1 is empty", (shoppingBaskets1.size() > 0));
+		Assert.assertTrue("Shopping Baskets 1 is empty", (shoppingBaskets1.isEmpty()));
 		System.out.println(invoiceService.calculateInvoice(shoppingBaskets1).toString());
 
 		// Calculate invoice for shopping baskets 2
-		Assert.assertTrue("Shopping Baskets 2 is empty", (shoppingBaskets2.size() > 0));
+		Assert.assertTrue("Shopping Baskets 2 is empty", (shoppingBaskets2.isEmpty()));
 		System.out.println(invoiceService.calculateInvoice(shoppingBaskets2).toString());
 
 		// Calculate invoice for shopping baskets 3
-		Assert.assertTrue("Shopping Baskets 3 is empty", (shoppingBaskets3.size() > 0));
+		Assert.assertTrue("Shopping Baskets 3 is empty", (shoppingBaskets3.isEmpty()));
 		System.out.println(invoiceService.calculateInvoice(shoppingBaskets3).toString());
 
 	}

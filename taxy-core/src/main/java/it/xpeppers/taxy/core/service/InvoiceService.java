@@ -47,6 +47,7 @@ public interface InvoiceService {
 	 * @return price calculated with basic sales tax
 	 */
 	public BigDecimal calculateProductBasicSalesTax(BigDecimal price);
+	
 	/**
 	 * Calculate fixed import sales tax
 	 * @param price without tax

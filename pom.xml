@@ -16,6 +16,8 @@
 	<properties>
 		<maven-compiler-plugin.version>3.5.1</maven-compiler-plugin.version>
 		<junit.version>4.11</junit.version>
+		<resteasy-jackson-provider.version>2.2.1.GA</resteasy-jackson-provider.version>
+		<resteasy-jaxrs.version>2.2.1.GA</resteasy-jaxrs.version>
 	</properties>
 
 	<build>
@@ -58,6 +60,16 @@
 				<groupId>it.xpeppers.taxy</groupId>
 				<artifactId>taxy-core</artifactId>
 				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.jboss.resteasy</groupId>
+				<artifactId>resteasy-jaxrs</artifactId>
+				<version>${resteasy-jaxrs.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.jboss.resteasy</groupId>
+				<artifactId>resteasy-jackson-provider</artifactId>
+				<version>${resteasy-jackson-provider.version}</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
