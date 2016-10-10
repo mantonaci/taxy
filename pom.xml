@@ -14,11 +14,19 @@
 	</modules>
 
 	<properties>
-		<maven-compiler-plugin.version>3.5.1</maven-compiler-plugin.version>
-		<junit.version>4.11</junit.version>
-		<resteasy-jackson-provider.version>2.2.1.GA</resteasy-jackson-provider.version>
-		<resteasy-jaxrs.version>2.2.1.GA</resteasy-jaxrs.version>
+		<project.build.sourceEncoding>ISO-8859-1</project.build.sourceEncoding>
+		<resteasy-jaxrs.version>3.0.19.Final</resteasy-jaxrs.version>
+		<resteasy-validator-provider-11.version>3.0.19.Final</resteasy-validator-provider-11.version>
+		<javaee-api.version>7.0</javaee-api.version>
+		<javax.inject.version>1</javax.inject.version>
+		<jackson-databind.version>2.3.2</jackson-databind.version>
+		<weld-servlet.version>2.2.3.Final</weld-servlet.version>
 		<slf4j-simple.version>1.7.21</slf4j-simple.version>
+		<junit.version>4.12</junit.version>
+		<mockito-core.version>2.1.0</mockito-core.version>
+		<maven-compiler-plugin.version>3.5.1</maven-compiler-plugin.version>
+		<maven-deploy-plugin.version>2.8.2</maven-deploy-plugin.version>
+		<wildfly-maven-plugin.version>1.0.2.Final</wildfly-maven-plugin.version>
 	</properties>
 
 	<build>
@@ -30,6 +38,7 @@
 				<configuration>
 					<source>1.8</source>
 					<target>1.8</target>
+					<encoding>${project.build.sourceEncoding}</encoding>
 				</configuration>
 			</plugin>
 		</plugins>
@@ -38,12 +47,12 @@
 				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-deploy-plugin</artifactId>
-					<version>2.8.2</version>
+					<version>${maven-deploy-plugin.version}</version>
 				</plugin>
 				<plugin>
-					<groupId>org.eclipse.jetty</groupId>
-					<artifactId>jetty-maven-plugin</artifactId>
-					<version>9.2.11.v20150529</version>
+					<groupId>org.wildfly.plugins</groupId>
+					<artifactId>wildfly-maven-plugin</artifactId>
+					<version>1.0.2.Final</version>
 				</plugin>
 			</plugins>
 		</pluginManagement>
@@ -52,15 +61,15 @@
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
-				<groupId>junit</groupId>
-				<artifactId>junit</artifactId>
-				<version>${junit.version}</version>
-				<scope>test</scope>
+				<groupId>javax.inject</groupId>
+				<artifactId>javax.inject</artifactId>
+				<version>${javax.inject.version}</version>
 			</dependency>
 			<dependency>
-				<groupId>it.xpeppers.taxy</groupId>
-				<artifactId>taxy-core</artifactId>
-				<version>${project.version}</version>
+				<groupId>javax</groupId>
+				<artifactId>javaee-api</artifactId>
+				<version>${javaee-api.version}</version>
+				<scope>provided</scope>
 			</dependency>
 			<dependency>
 				<groupId>org.jboss.resteasy</groupId>
@@ -68,10 +77,42 @@
 				<version>${resteasy-jaxrs.version}</version>
 			</dependency>
 			<dependency>
-				<groupId>org.jboss.resteasy</groupId>
-				<artifactId>resteasy-jackson-provider</artifactId>
-				<version>${resteasy-jackson-provider.version}</version>
+				<groupId>com.fasterxml.jackson.core</groupId>
+				<artifactId>jackson-databind</artifactId>
+				<version>${jackson-databind.version}</version>
 			</dependency>
+			<dependency>
+				<groupId>org.jboss.resteasy</groupId>
+				<artifactId>resteasy-validator-provider-11</artifactId>
+				<version>${resteasy-validator-provider-11.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.jboss.weld.servlet</groupId>
+				<artifactId>weld-servlet</artifactId>
+				<version>${weld-servlet.version}</version>
+			</dependency>
+
+			<!-- taxy lib -->
+			<dependency>
+				<groupId>it.xpeppers.taxy</groupId>
+				<artifactId>taxy-core</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+
+			<!-- testing -->
+			<dependency>
+				<groupId>org.mockito</groupId>
+				<artifactId>mockito-core</artifactId>
+				<version>${mockito-core.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>junit</groupId>
+				<artifactId>junit</artifactId>
+				<version>${junit.version}</version>
+				<scope>test</scope>
+			</dependency>
+
+			<!-- logging -->
 			<dependency>
 				<groupId>org.slf4j</groupId>
 				<artifactId>slf4j-simple</artifactId>
