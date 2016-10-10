@@ -16,13 +16,13 @@
  * limitations under the License.
  */
 
-package it.xpeppers.taxy.core.model;
-
-import it.xpeppers.taxy.core.enumeration.ProductCategory;
+package com.taxy.core.model;
 
 import java.math.BigDecimal;
 
 import javax.validation.constraints.NotNull;
+
+import com.taxy.core.enumeration.ProductCategory;
 
 /**
  * Class <code>Item.java</code> is

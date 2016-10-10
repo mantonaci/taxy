@@ -16,12 +16,7 @@
  * limitations under the License.
  */
 
-package it.xpeppers.taxy.core.service;
-
-import it.xpeppers.taxy.core.enumeration.ProductCategory;
-import it.xpeppers.taxy.core.model.Product;
-import it.xpeppers.taxy.core.runner.WeldJUnit4Runner;
-import it.xpeppers.taxy.core.service.InvoiceService;
+package com.taxy.core.service;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -35,6 +30,11 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import com.taxy.core.enumeration.ProductCategory;
+import com.taxy.core.model.Product;
+import com.taxy.core.runner.WeldJUnit4Runner;
+import com.taxy.core.service.InvoiceService;
 
 /**
  * Class <code>InvoiceServiceTest.java</code> is
@@ -50,7 +50,7 @@ public class InvoiceServiceImplTest {
 	static final Logger LOG = LoggerFactory.getLogger(InvoiceServiceImplTest.class);
 
 	@Inject
-	InvoiceService invoiceService;// = new InvoiceServiceImpl();
+	InvoiceService invoiceService;
 
 	List<Product> shoppingBaskets1 = new ArrayList<>();
 	List<Product> shoppingBaskets2 = new ArrayList<>();

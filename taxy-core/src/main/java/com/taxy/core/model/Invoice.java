@@ -16,7 +16,7 @@
  * limitations under the License.
  */
 
-package it.xpeppers.taxy.core.model;
+package com.taxy.core.model;
 
 import java.math.BigDecimal;
 import java.util.List;

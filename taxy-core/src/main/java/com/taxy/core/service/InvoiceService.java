@@ -16,13 +16,13 @@
  * limitations under the License.
  */
 
-package it.xpeppers.taxy.core.service;
-
-import it.xpeppers.taxy.core.model.Invoice;
-import it.xpeppers.taxy.core.model.Product;
+package com.taxy.core.service;
 
 import java.math.BigDecimal;
 import java.util.List;
+
+import com.taxy.core.model.Invoice;
+import com.taxy.core.model.Product;
 
 /**
  * Class <code>InvoiceService.java</code> is
@@ -37,7 +37,7 @@ public interface InvoiceService {
 	/**
 	 * Calculate invoice for shopping brackets
 	 * @param products
-	 * @return invoice with sales tax and total price {@link it.xpeppers.taxy.core.model.Invoice}
+	 * @return invoice with sales tax and total price {@link com.taxy.core.model.Invoice}
 	 */
 	public Invoice calculateInvoice(List<Product> products);
 	

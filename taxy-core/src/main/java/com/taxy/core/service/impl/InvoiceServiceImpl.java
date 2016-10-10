@@ -16,15 +16,15 @@
  * limitations under the License.
  */
 
-package it.xpeppers.taxy.core.service.impl;
-
-import it.xpeppers.taxy.core.model.Invoice;
-import it.xpeppers.taxy.core.model.Product;
-import it.xpeppers.taxy.core.service.InvoiceService;
+package com.taxy.core.service.impl;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+
+import com.taxy.core.model.Invoice;
+import com.taxy.core.model.Product;
+import com.taxy.core.service.InvoiceService;
 
 /**
  * Class <code>InvoiceServiceImpl.java</code> is

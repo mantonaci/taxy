@@ -1,5 +1,5 @@
 /*
- * @(#)InvoiceRestService.java        1.00	8 Oct 2016
+ * @(#)UnrecognizedPropertyExceptionMapper.java        1.00	8 Oct 2016
  *
  * Copyright (c) 2016 Michele Antonaci
  *
@@ -21,19 +21,36 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package com.taxy.api.application;
+package com.taxy.api.rest.exception;
 
-import javax.ws.rs.ApplicationPath;
-import javax.ws.rs.core.Application;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.Status;
+import javax.ws.rs.ext.ExceptionMapper;
+import javax.ws.rs.ext.Provider;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.fasterxml.jackson.databind.exc.UnrecognizedPropertyException;
 
 /**
- * Class <code>TaxyApplication.java</code> is
+ * Class <code>UnrecognizedPropertyExceptionMapper.java</code> is
  *
  * @author Michele Antonaci antonaci.michele@gmail.com
- * @version 1.00 10 Oct 2016
+ * @version 1.00 9 Oct 2016
  *
  */
 
-@ApplicationPath("")
-public class TaxyApplication extends Application {
+@Provider
+public class UnrecognizedPropertyExceptionMapper implements ExceptionMapper<UnrecognizedPropertyException> {
+
+	private static final Logger LOG = LoggerFactory.getLogger(UnrecognizedPropertyExceptionMapper.class);
+
+	@Override
+	public Response toResponse(UnrecognizedPropertyException unrecognizedPropertyException) {
+
+		LOG.info("UnrecognizedPropertyExceptionHandler :: {}", unrecognizedPropertyException.getMessage());
+		return Response.status(Status.BAD_REQUEST).type(MediaType.APPLICATION_JSON).build();
+	}
 }

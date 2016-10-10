@@ -16,7 +16,7 @@
  * limitations under the License.
  */
 
-package it.xpeppers.taxy.core.enumeration;
+package com.taxy.core.enumeration;
 
 /**
  * Class <code>ProductCategory.java</code> is
