@@ -22,6 +22,8 @@ import it.xpeppers.taxy.core.enumeration.ProductCategory;
 
 import java.math.BigDecimal;
 
+import javax.validation.constraints.NotNull;
+
 /**
  * Class <code>Item.java</code> is
  *
@@ -32,19 +34,32 @@ import java.math.BigDecimal;
 
 public class Product {
 
+	private String title;
+	@NotNull
 	private BigDecimal price;
 	private BigDecimal taxedPrice;
+	@NotNull
 	private ProductCategory category;
+	@NotNull
 	private boolean imported;
 
 	public Product() {
 	}
 
-	public Product(BigDecimal price, BigDecimal taxedPrice, ProductCategory category, boolean imported) {
+	public Product(String title, BigDecimal price, BigDecimal taxedPrice, ProductCategory category, boolean imported) {
+		this.title = title;
 		this.price = price;
 		this.taxedPrice = taxedPrice;
 		this.category = category;
 		this.imported = imported;
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
 	}
 
 	public BigDecimal getPrice() {
@@ -82,7 +97,9 @@ public class Product {
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("Product [price=");
+		builder.append("Product [title=");
+		builder.append(title);
+		builder.append(", price=");
 		builder.append(price);
 		builder.append(", taxedPrice=");
 		builder.append(taxedPrice);
@@ -93,5 +110,5 @@ public class Product {
 		builder.append("]");
 		return builder.toString();
 	}
-
+	
 }

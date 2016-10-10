@@ -35,11 +35,12 @@ import java.util.List;
  */
 
 public class InvoiceServiceImpl implements InvoiceService {
-
+    
 	//Basic sales tax
 	private static final BigDecimal BASIC_SALES_TAX = new BigDecimal("10");
 	//Sales tax for import duty
 	private static final BigDecimal IMPORT_SALES_TAX = new BigDecimal("5");
+	//Scale to round up the sales tax
 	private static final BigDecimal ROUND_SCALE = new BigDecimal("0.05");
 	
 	@Override
@@ -49,7 +50,8 @@ public class InvoiceServiceImpl implements InvoiceService {
 		List<Product> productsInvoiced = new ArrayList<>();
 		BigDecimal salesTax = new BigDecimal("0");
 		BigDecimal totalPrice = new BigDecimal("0");
-
+		
+		//Calculate sales tax for all products in shopping brackets
 		for (Product product : products) {
 
 			BigDecimal productFinalPrice;
@@ -72,7 +74,8 @@ public class InvoiceServiceImpl implements InvoiceService {
 			product.setTaxedPrice(productFinalPrice);
 			productsInvoiced.add(product);
 		}
-
+		
+		//Set invoice attributes: products with taxed price, sales tax and total price
 		invoice.setProducts(productsInvoiced);
 		invoice.setSalesTax(salesTax);
 		invoice.setTotalPrice(totalPrice);
