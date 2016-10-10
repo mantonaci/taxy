@@ -1,5 +1,5 @@
 /*
- * @(#)TaxyApplication.java        1.00	8 Oct 2016
+ * Copyright 2016 Michele Antonaci
  *
  * Copyright (c) 2016 Michele Antonaci
  *
@@ -21,19 +21,34 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package com.taxy.api.application;
-
-import javax.ws.rs.ApplicationPath;
-import javax.ws.rs.core.Application;
+package com.taxy.api.rest.violation;
 
 /**
- * Class <code>TaxyApplication.java</code> is
+ * Class <code>TaxyApiViolation.java</code> is
  *
  * @author Michele Antonaci antonaci.michele@gmail.com
  * @version 1.00 10 Oct 2016
  *
  */
 
-@ApplicationPath("")
-public class TaxyApplication extends Application {
+public class TaxyApiViolation {
+
+	private int code;
+	private Object message;
+
+	public int getCode() {
+		return code;
+	}
+
+	public void setCode(int code) {
+		this.code = code;
+	}
+
+	public Object getMessage() {
+		return message;
+	}
+
+	public void setMessage(Object message) {
+		this.message = message;
+	}
 }

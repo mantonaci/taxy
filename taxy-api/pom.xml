@@ -44,7 +44,7 @@
 			<artifactId>weld-servlet</artifactId>
 			<scope>provided</scope>
 		</dependency>
-
+		
 		<!-- taxy lib -->
 		<dependency>
 			<groupId>it.xpeppers.taxy</groupId>

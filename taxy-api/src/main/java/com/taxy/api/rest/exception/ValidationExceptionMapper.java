@@ -1,5 +1,5 @@
 /*
- * @(#)InvoiceRestService.java        1.00	8 Oct 2016
+ * @(#)ValidationExceptionMapper.java        1.00	8 Oct 2016
  *
  * Copyright (c) 2016 Michele Antonaci
  *
@@ -23,13 +23,18 @@
 
 package com.taxy.api.rest.exception;
 
-import javax.validation.ConstraintViolationException;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import javax.ws.rs.ext.ExceptionMapper;
+import javax.ws.rs.core.Response.Status;
 import javax.ws.rs.ext.Provider;
 
+import org.jboss.resteasy.api.validation.ResteasyViolationException;
+import org.jboss.resteasy.api.validation.ResteasyViolationExceptionMapper;
+import org.jboss.resteasy.api.validation.ViolationReport;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import com.taxy.api.rest.violation.TaxyApiViolation;
 
 /**
  * Class <code>ValidationExceptionMapper.java</code> is
@@ -40,14 +45,18 @@ import org.slf4j.LoggerFactory;
  */
 
 @Provider
-public class ValidationExceptionMapper implements ExceptionMapper<ConstraintViolationException> {
+public class ValidationExceptionMapper extends ResteasyViolationExceptionMapper {
 
 	private static final Logger LOG = LoggerFactory.getLogger(ValidationExceptionMapper.class);
 
-	@Override
-	public Response toResponse(javax.validation.ConstraintViolationException constraintViolationException) {
+	protected Response buildViolationReportResponse(ResteasyViolationException exception, Status status) {
+		LOG.error("ConstraintViolationException :: {}", exception.getConstraintViolations());
 
-		LOG.error("ConstraintViolationException :: {}", constraintViolationException.getConstraintViolations());
-		return Response.status(400).build();
+		ViolationReport violationReport = new ViolationReport(exception);
+		TaxyApiViolation taxyApiViolation = new TaxyApiViolation();
+		taxyApiViolation.setCode(400);
+		taxyApiViolation.setMessage(violationReport.getParameterViolations());
+
+		return Response.status(status).type(MediaType.APPLICATION_JSON).entity(taxyApiViolation).build();
 	}
 }

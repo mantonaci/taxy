@@ -21,7 +21,7 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package com.taxy.api.rest;
+package com.taxy.api.rest.service;
 
 import java.util.List;
 
