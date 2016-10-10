@@ -1,5 +1,5 @@
 /*
- * @(#)Test.java        1.00	8 Oct 2016
+ * @(#)InvoiceRestService.java        1.00	8 Oct 2016
  *
  * Copyright 2016 Michele Antonaci
  *
@@ -18,37 +18,39 @@
 
 package it.xpeppers.taxy.api.rest;
 
+import it.xpeppers.taxy.core.model.Invoice;
 import it.xpeppers.taxy.core.model.Product;
-import it.xpeppers.taxy.core.service.impl.InvoiceServiceImpl;
+import it.xpeppers.taxy.core.service.InvoiceService;
 
 import java.util.List;
 
+import javax.inject.Inject;
+import javax.validation.Valid;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
-import javax.ws.rs.core.Response;
 
 /**
- * Class <code>Test.java</code> is
+ * Class <code>InvoiceRestService.java</code> is
  *
  * @author Michele Antonaci antonaci.michele@gmail.com
  * @version 1.00 8 Oct 2016
  *
  */
 
-@Produces("application/json")
 @Consumes("application/json")
+@Produces("application/json")
 @Path("/api")
 public class InvoiceRestService {
 
-	InvoiceServiceImpl invoiceServiceImpl = new InvoiceServiceImpl();
+	@Inject
+	InvoiceService invoiceService;
 
-	//FIXME: wrapper errors
 	@POST
 	@Path("/invoice")
-	public Response printMessage(List<Product> products) {
-		return Response.status(200).entity(invoiceServiceImpl.calculateInvoice(products)).build();
+	public Invoice create(@Valid List<Product> products) {
+		return invoiceService.calculateInvoice(products); // FIXME: wrapper errors
 	}
 
 }
