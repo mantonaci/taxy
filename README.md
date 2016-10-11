@@ -8,7 +8,7 @@
 - [Requirements](#Requirements)
 - [Documentation](#Documentation)
   - [Test](#Test)
-  - [REST API](#RestAPI)
+  - [REST API](#rest-api)
 
 ## <a name='Overview'>Overview<a/>
 
@@ -24,4 +24,4 @@ Taxy requires JDK 7 or higher.
 ## <a name='Documentation'>Documentation<a/>
 
 ### <a name='Test'>Test<a/>
-### <a name='RestApi'>REST API<a/>
+### <a name='rest-api'>REST API<a/>
