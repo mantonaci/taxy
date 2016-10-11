@@ -82,21 +82,21 @@ OUTPUT
 
 **TEST CASE 2**
 ```
-curl -H "Content-Type: application/json" -X POST -d '[{"title":"Peruginaboxchocolates","price":10,"category":"FOOD","imported":true},{"title":"Onemillion","price":47.5,"category":"PERFUME","imported":true}]' http://localhost:8080/taxy/api/invoice
+curl -H "Content-Type: application/json" -X POST -d '[{"title":"Perugina box chocolates","price":10,"category":"FOOD","imported":true},{"title":"One million","price":47.5,"category":"PERFUME","imported":true}]' http://localhost:8080/taxy/api/invoice
 
 OUTPUT
 
 {
   "products": [
     {
-      "title": "Peruginaboxchocolates",
+      "title": "Perugina box chocolates",
       "price": 10,
       "taxedPrice": 10.5,
       "category": "FOOD",
       "imported": true
     },
     {
-      "title": "Onemillion",
+      "title": "One million",
       "price": 47.5,
       "taxedPrice": 54.65,
       "category": "PERFUME",
@@ -110,7 +110,7 @@ OUTPUT
 
 **TEST CASE 3**
 ```
-curl -H "Content-Type: application/json" -X POST -d '[{"title":"D&G","price":27.99,"category":"PERFUME","imported":true},{"title":"UgoBoss","price":18.99,"category":"PERFUME","imported":false},{"title":"Aulin","price":9.75,"category":"MEDICAL","imported":false},{"title":"Novichocolate","price":11.25,"category":"FOOD","imported":true}]' http://localhost:8080/taxy/api/invoice
+curl -H "Content-Type: application/json" -X POST -d '[{"title":"D&G","price":27.99,"category":"PERFUME","imported":true},{"title":"Ugo Boss","price":18.99,"category":"PERFUME","imported":false},{"title":"Aulin","price":9.75,"category":"MEDICAL","imported":false},{"title":"Novi chocolate","price":11.25,"category":"FOOD","imported":true}]' http://localhost:8080/taxy/api/invoice
 
 OUTPUT
 
@@ -124,7 +124,7 @@ OUTPUT
       "imported": true
     },
     {
-      "title": "UgoBoss",
+      "title": "Ugo Boss",
       "price": 18.99,
       "taxedPrice": 20.89,
       "category": "PERFUME",
@@ -138,7 +138,7 @@ OUTPUT
       "imported": false
     },
     {
-      "title": "Novichocolate",
+      "title": "Novi chocolate",
       "price": 11.25,
       "taxedPrice": 11.85,
       "category": "FOOD",
