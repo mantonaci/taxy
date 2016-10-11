@@ -33,7 +33,7 @@ Execute ```mvn test``` and check logs to verify 3 test case in [Sales taxes prob
 
 ### <a name='rest-api'>REST API<a/>
 
-Alternative you can verify the tests case via REST API. Go into taxy-core module and execute this command ```mvn wildfly:run``` to start application server by **wildfly-maven-plugin**.
+Alternative you can verify the test cases via REST API. Go into taxy-core module and execute this command ```mvn wildfly:run``` to start application server by **wildfly-maven-plugin**.
 
 ```maven
 <plugins>
@@ -43,7 +43,7 @@ Alternative you can verify the tests case via REST API. Go into taxy-core module
   </plugin>
 </plugins>
 ```
-Use rest client to call APIs or ```curl```. Below, **TESTS CASE** verification with ```curl```:
+Use rest client to call APIs or ```curl```. Below, **TEST CASES** verification with ```curl```:
 
 
 **TEST CASE 1**
