@@ -5,7 +5,23 @@
 # Taxy
 
 - [Overview](#Overview)
+- [Requirements](#Requirements)
+- [Documentation](#Documentation)
+  - [Test](#Test)
+  - [REST API](#RestAPI)
 
 ## <a name='Overview'>Overview<a/>
 
 Test RESTFul Web Application to calculate invoices, with tax (basic sales tax and import sales tax), for any kind of products.
+
+## <a name='Requirements'>Requirements<a/>
+
+Taxy requires JDK 7 or higher.
+
+- [Apache Maven 3+](https://maven.apache.org/)
+- [WildFly 10+](http://wildfly.org/downloads/) o [JBoss 7+](http://developers.redhat.com/products/eap/download/)
+
+## <a name='Documentation'>Documentation<a/>
+
+### <a name='Test'>Test<a/>
+### <a name='RestApi'>REST API<a/>
