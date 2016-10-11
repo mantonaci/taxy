@@ -12,7 +12,7 @@
 
 ## <a name='Overview'>Overview<a/>
 
-Test RESTFul Web Application to calculate invoices, with tax (basic sales tax and import sales tax), for any kind of products.
+RESTFul Web APIs to calculate invoices, with tax (basic sales tax and import sales tax), for any kind of products.
 
 ## <a name='Requirements'>Requirements<a/>
 
