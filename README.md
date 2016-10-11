@@ -45,7 +45,6 @@ Alternative you can verify the test cases via REST API. Go into taxy-core module
 ```
 Use rest client to call APIs or ```curl```. Below, **TEST CASES** verification with ```curl```:
 
-
 **TEST CASE 1**
 ```
 curl -H "Content-Type: application/json" -X POST -d '[{"title":"Crypto","price":12.49,"category":"BOOK","imported": false},{"title": "Mumford & Sons CD","price":14.99,"category":"MUSIC","imported":false},{"title":"Ferrero chocolate","price": 0.85,"category":"FOOD", "imported":false}]' http://localhost:8080/taxy/api/invoice
@@ -151,7 +150,23 @@ OUTPUT
 }
 ```
 
+Also you can calculate sales taxt for a single product:
 
+```
+curl -H "Content-Type: application/json" -X POST -d '{"title":"D&G","price":27.99,"category":"PERFUME","imported":true}' http://localhost:8080/taxy/api/product
+
+OUTPUT
+
+{
+  "title": "D&G",
+  "price": 27.99,
+  "taxedPrice": 32.19,
+  "category": "PERFUME",
+  "imported": true
+}
+```
+
+Enjoy!
 
 
  
