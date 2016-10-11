@@ -23,5 +23,135 @@ Taxy requires JDK 7 or higher.
 
 ## <a name='Documentation'>Documentation<a/>
 
+You can verify [Sales taxes problem](https://github.com/xpeppers/sales-taxes-problem) in two wayes: TEST and REST API.
+
+Before start you should execute ```mvn clean instal``` in root project.
+
 ### <a name='Test'>Test<a/>
+
+Execute ```mvn test``` and check logs to verify 3 test case in [Sales taxes problem](https://github.com/xpeppers/sales-taxes-problem). You can search **SHIPPING BASKET n** (**n** is **TEST CASE** number) keyword.
+
 ### <a name='rest-api'>REST API<a/>
+
+Alternative you can verify the tests case via REST API. Go into taxy-core module and execute this command ```mvn wildfly:run``` to start application server by **wildfly-maven-plugin**.
+
+```maven
+<plugins>
+  <plugin>
+    <groupId>org.wildfly.plugins</groupId>
+    <artifactId>wildfly-maven-plugin</artifactId>
+  </plugin>
+</plugins>
+```
+Use rest client to call APIs or ```curl```. Below, **TESTS CASE** verification with ```curl```:
+
+
+**TEST CASE 1**
+```
+curl -H "Content-Type: application/json" -X POST -d '[{"title":"Crypto","price":12.49,"category":"BOOK","imported": false},{"title": "Mumford & Sons CD","price":14.99,"category":"MUSIC","imported":false},{"title":"Ferrero chocolate","price": 0.85,"category":"FOOD", "imported":false}]' http://localhost:8080/taxy/api/invoice
+
+OUTPUT
+
+{
+  "products": [
+    {
+      "title": "Crypto",
+      "price": 12.49,
+      "taxedPrice": 12.49,
+      "category": "BOOK",
+      "imported": false
+    },
+    {
+      "title": "Mumford & Sons CD",
+      "price": 14.99,
+      "taxedPrice": 16.49,
+      "category": "MUSIC",
+      "imported": false
+    },
+    {
+      "title": "Ferrero chocolate",
+      "price": 0.85,
+      "taxedPrice": 0.85,
+      "category": "FOOD",
+      "imported": false
+    }
+  ],
+  "salesTax": 1.5,
+  "totalPrice": 29.83
+}
+```
+
+**TEST CASE 2**
+```
+curl -H "Content-Type: application/json" -X POST -d '[{"title":"Peruginaboxchocolates","price":10,"category":"FOOD","imported":true},{"title":"Onemillion","price":47.5,"category":"PERFUME","imported":true}]' http://localhost:8080/taxy/api/invoice
+
+OUTPUT
+
+{
+  "products": [
+    {
+      "title": "Peruginaboxchocolates",
+      "price": 10,
+      "taxedPrice": 10.5,
+      "category": "FOOD",
+      "imported": true
+    },
+    {
+      "title": "Onemillion",
+      "price": 47.5,
+      "taxedPrice": 54.65,
+      "category": "PERFUME",
+      "imported": true
+    }
+  ],
+  "salesTax": 7.65,
+  "totalPrice": 65.15
+}
+```
+
+**TEST CASE 3**
+```
+curl -H "Content-Type: application/json" -X POST -d '[{"title":"D&G","price":27.99,"category":"PERFUME","imported":true},{"title":"UgoBoss","price":18.99,"category":"PERFUME","imported":false},{"title":"Aulin","price":9.75,"category":"MEDICAL","imported":false},{"title":"Novichocolate","price":11.25,"category":"FOOD","imported":true}]' http://localhost:8080/taxy/api/invoice
+
+OUTPUT
+
+{
+  "products": [
+    {
+      "title": "D&G",
+      "price": 27.99,
+      "taxedPrice": 32.19,
+      "category": "PERFUME",
+      "imported": true
+    },
+    {
+      "title": "UgoBoss",
+      "price": 18.99,
+      "taxedPrice": 20.89,
+      "category": "PERFUME",
+      "imported": false
+    },
+    {
+      "title": "Aulin",
+      "price": 9.75,
+      "taxedPrice": 9.75,
+      "category": "MEDICAL",
+      "imported": false
+    },
+    {
+      "title": "Novichocolate",
+      "price": 11.25,
+      "taxedPrice": 11.85,
+      "category": "FOOD",
+      "imported": true
+    }
+  ],
+  "salesTax": 6.7,
+  "totalPrice": 74.68
+}
+```
+
+
+
+
+ 
