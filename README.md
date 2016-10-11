@@ -8,7 +8,7 @@
 - [Requirements](#Requirements)
 - [Documentation](#Documentation)
   - [Test](#Test)
-  - [REST API](#rest-api)
+  - [Rest API](#rest-api)
 
 ## <a name='Overview'>Overview<a/>
 
@@ -25,13 +25,13 @@ Taxy requires JDK 7 or higher.
 
 You can verify [Sales taxes problem](https://github.com/xpeppers/sales-taxes-problem) in two wayes: TEST and REST API.
 
-Before start you should execute ```mvn clean instal``` in root project.
+Before start you should execute ```mvn clean install``` in root project.
 
 ### <a name='Test'>Test<a/>
 
-Execute ```mvn test``` and check logs to verify 3 test case in [Sales taxes problem](https://github.com/xpeppers/sales-taxes-problem). You can search **SHIPPING BASKET n** (**n** is **TEST CASE** number) keyword.
+Execute ```mvn test``` and check logs to verify test cases in [Sales taxes problem](https://github.com/xpeppers/sales-taxes-problem), you can search **SHIPPING BASKET n** (**n** is **TEST CASE** number) keyword.
 
-### <a name='rest-api'>REST API<a/>
+### <a name='rest-api'>Rest API<a/>
 
 Alternative you can verify the test cases via REST API. Go into taxy-core module and execute this command ```mvn wildfly:run``` to start application server by **wildfly-maven-plugin**.
 
@@ -43,7 +43,7 @@ Alternative you can verify the test cases via REST API. Go into taxy-core module
   </plugin>
 </plugins>
 ```
-Use rest client to call APIs or ```curl```. Below, **TEST CASES** verification with ```curl```:
+Use rest client or ```curl``` to call APIs. Below, **TEST CASES** verification with ```curl```:
 
 **TEST CASE 1**
 ```
