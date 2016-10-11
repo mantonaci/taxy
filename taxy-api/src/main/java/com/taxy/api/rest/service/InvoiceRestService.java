@@ -32,6 +32,7 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 
+import com.taxy.core.exception.TaxyException;
 import com.taxy.core.model.Invoice;
 import com.taxy.core.model.Product;
 import com.taxy.core.service.InvoiceService;
@@ -54,8 +55,7 @@ public class InvoiceRestService {
 
 	@POST
 	@Path("/invoice")
-	public Invoice create(@Valid List<Product> products) {
+	public Invoice create(@Valid List<Product> products) throws TaxyException {
 		return invoiceService.calculateInvoice(products);
 	}
-
 }

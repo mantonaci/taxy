@@ -1,6 +1,4 @@
 /*
- * @(#)InvoiceService.java        1.00	7 Oct 2016
- *
  * Copyright 2016 Michele Antonaci
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -16,31 +14,37 @@
  * limitations under the License.
  */
 
-package com.taxy.core.service;
-
-import java.util.List;
-
-import com.taxy.core.exception.TaxyException;
-import com.taxy.core.model.Invoice;
-import com.taxy.core.model.Product;
+package com.taxy.core.exception;
 
 /**
- * Class <code>InvoiceService.java</code> is
+ * Class <code>TaxyException.java</code> is
  *
  * @author Michele Antonaci antonaci.michele@gmail.com
- * @version 1.00 7 Oct 2016
+ * @version 1.00 11 Oct 2016
  *
  */
 
-public interface InvoiceService {
+public class TaxyException extends Exception {
 
-	/**
-	 * Calculate invoice for shopping brackets
-	 * 
-	 * @param products
-	 * @return invoice with sales tax and total price
-	 *         {@link com.taxy.core.model.Invoice}
-	 */
-	public Invoice calculateInvoice(List<Product> products) throws TaxyException;
+	private static final long serialVersionUID = 1L;
 
+	public TaxyException() {
+		super();
+	}
+
+	public TaxyException(String message) {
+		super(message);
+	}
+
+	public TaxyException(String message, Throwable cause) {
+		super(message, cause);
+	}
+
+	public TaxyException(Throwable cause) {
+		super(cause);
+	}
+
+	protected TaxyException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
+		super(message, cause, enableSuppression, writableStackTrace);
+	}
 }

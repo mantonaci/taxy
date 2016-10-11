@@ -48,12 +48,12 @@ public class UnrecognizedPropertyExceptionMapper implements ExceptionMapper<Unre
 
 	@Inject
 	@Log
-	private Logger LOG;
+	private Logger log;
 
 	@Override
 	public Response toResponse(UnrecognizedPropertyException unrecognizedPropertyException) {
 
-		LOG.error("restapi:: status = 400, unrecognizedPropertyExceptionHandler = {}", unrecognizedPropertyException.getMessage());
+		log.error("restapi:: status = 400, unrecognizedPropertyExceptionHandler = {}", unrecognizedPropertyException.getMessage());
 		return Response.status(Status.BAD_REQUEST).type(MediaType.APPLICATION_JSON).build();
 	}
 }

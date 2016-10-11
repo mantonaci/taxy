@@ -1,5 +1,5 @@
 /*
- * @(#)JsonMappingExceptionMapper.java        1.00	8 Oct 2016
+ * @(#)ProductServiceTest.java        1.00	11 Oct 2016
  *
  * Copyright (c) 2016 Michele Antonaci
  *
@@ -21,39 +21,59 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package com.taxy.api.rest.exception;
+package com.taxy.core.service;
+
+import java.math.BigDecimal;
 
 import javax.inject.Inject;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
-import javax.ws.rs.core.Response.Status;
-import javax.ws.rs.ext.ExceptionMapper;
-import javax.ws.rs.ext.Provider;
 
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 
-import com.fasterxml.jackson.databind.JsonMappingException;
 import com.taxy.core.annotation.Log;
+import com.taxy.core.exception.TaxyException;
+import com.taxy.core.model.Product;
+import com.taxy.core.model.enumeration.ProductCategory;
+import com.taxy.core.runner.WeldJUnit4Runner;
 
 /**
- * Class <code>JsonMappingExceptionMapper.java</code> is
+ * Class <code>ProductServiceTest.java</code> is
  *
  * @author Michele Antonaci antonaci.michele@gmail.com
- * @version 1.00 10 Oct 2016
+ * @version 1.00 11 Oct 2016
  *
  */
 
-@Provider
-public class JsonMappingExceptionMapper implements ExceptionMapper<JsonMappingException> {
+@RunWith(WeldJUnit4Runner.class)
+public class ProductServiceTest {
 
 	@Inject
 	@Log
 	private Logger log;
 
-	@Override
-	public Response toResponse(JsonMappingException jsonMappingException) {
+	@Inject
+	ProductService productService;
+	
+	private Product product;
 
-		log.error("restapi:: status = 400, jsonMappingException :: {}", jsonMappingException.getMessage());
-		return Response.status(Status.BAD_REQUEST).type(MediaType.APPLICATION_JSON).build();
+	@Before
+	public void init() {
+		product = new Product();
+		product.setTitle("D&G");
+		product.setCategory(ProductCategory.PERFUME);
+		product.setPrice(new BigDecimal("10.00"));
+		product.setImported(true);
 	}
+
+	@Test
+	public void calculateProductSalesTaxTest() {
+		try {
+			productService.calculateProductSalesTax(product);
+		} catch (TaxyException e) {
+			log.error("calculateInvoiceTest", e);
+		}
+	}
+
 }

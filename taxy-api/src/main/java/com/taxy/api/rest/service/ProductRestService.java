@@ -1,5 +1,5 @@
 /*
- * @(#)JsonMappingExceptionMapper.java        1.00	8 Oct 2016
+ * @(#)ProductRestService.java        1.00	11 Oct 2016
  *
  * Copyright (c) 2016 Michele Antonaci
  *
@@ -21,39 +21,38 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package com.taxy.api.rest.exception;
+package com.taxy.api.rest.service;
 
 import javax.inject.Inject;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
-import javax.ws.rs.core.Response.Status;
-import javax.ws.rs.ext.ExceptionMapper;
-import javax.ws.rs.ext.Provider;
+import javax.validation.Valid;
+import javax.ws.rs.Consumes;
+import javax.ws.rs.POST;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
 
-import org.slf4j.Logger;
-
-import com.fasterxml.jackson.databind.JsonMappingException;
-import com.taxy.core.annotation.Log;
+import com.taxy.core.exception.TaxyException;
+import com.taxy.core.model.Product;
+import com.taxy.core.service.ProductService;
 
 /**
- * Class <code>JsonMappingExceptionMapper.java</code> is
+ * Class <code>ProductRestService.java</code> is
  *
  * @author Michele Antonaci antonaci.michele@gmail.com
- * @version 1.00 10 Oct 2016
+ * @version 1.00 11 Oct 2016
  *
  */
 
-@Provider
-public class JsonMappingExceptionMapper implements ExceptionMapper<JsonMappingException> {
+@Consumes("application/json")
+@Produces("application/json")
+@Path("/api")
+public class ProductRestService {
 
 	@Inject
-	@Log
-	private Logger log;
+	private ProductService productService;
 
-	@Override
-	public Response toResponse(JsonMappingException jsonMappingException) {
-
-		log.error("restapi:: status = 400, jsonMappingException :: {}", jsonMappingException.getMessage());
-		return Response.status(Status.BAD_REQUEST).type(MediaType.APPLICATION_JSON).build();
+	@POST
+	@Path("/product")
+	public Product create(@Valid Product product) throws TaxyException {
+		return productService.calculateProductSalesTax(product);
 	}
 }

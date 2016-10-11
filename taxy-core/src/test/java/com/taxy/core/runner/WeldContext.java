@@ -1,5 +1,5 @@
 /*
- * @(#)JsonMappingExceptionMapper.java        1.00	8 Oct 2016
+ * @(#)WeldContext.java        1.00	11 Oct 2016
  *
  * Copyright (c) 2016 Michele Antonaci
  *
@@ -21,39 +21,38 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package com.taxy.api.rest.exception;
+package com.taxy.core.runner;
 
-import javax.inject.Inject;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
-import javax.ws.rs.core.Response.Status;
-import javax.ws.rs.ext.ExceptionMapper;
-import javax.ws.rs.ext.Provider;
-
-import org.slf4j.Logger;
-
-import com.fasterxml.jackson.databind.JsonMappingException;
-import com.taxy.core.annotation.Log;
+import org.jboss.weld.environment.se.Weld;
+import org.jboss.weld.environment.se.WeldContainer;
 
 /**
- * Class <code>JsonMappingExceptionMapper.java</code> is
+ * Class <code>WeldContext.java</code> is
  *
  * @author Michele Antonaci antonaci.michele@gmail.com
- * @version 1.00 10 Oct 2016
+ * @version 1.00 11 Oct 2016
  *
  */
 
-@Provider
-public class JsonMappingExceptionMapper implements ExceptionMapper<JsonMappingException> {
+public class WeldContext {
 
-	@Inject
-	@Log
-	private Logger log;
+	public static final WeldContext INSTANCE = new WeldContext();
 
-	@Override
-	public Response toResponse(JsonMappingException jsonMappingException) {
+	private final Weld weld;
+	private final WeldContainer container;
 
-		log.error("restapi:: status = 400, jsonMappingException :: {}", jsonMappingException.getMessage());
-		return Response.status(Status.BAD_REQUEST).type(MediaType.APPLICATION_JSON).build();
+	private WeldContext() {
+		this.weld = new Weld();
+		this.container = weld.initialize();
+		Runtime.getRuntime().addShutdownHook(new Thread() {
+			@Override
+			public void run() {
+				weld.shutdown();
+			}
+		});
+	}
+
+	public <T> T getBean(Class<T> type) {
+		return container.instance().select(type).get();
 	}
 }

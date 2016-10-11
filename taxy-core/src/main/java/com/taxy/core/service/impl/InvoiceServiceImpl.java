@@ -33,9 +33,11 @@ import javax.inject.Inject;
 import org.slf4j.Logger;
 
 import com.taxy.core.annotation.Log;
+import com.taxy.core.exception.TaxyException;
 import com.taxy.core.model.Invoice;
 import com.taxy.core.model.Product;
 import com.taxy.core.service.InvoiceService;
+import com.taxy.core.service.ProductService;
 
 /**
  * Class <code>InvoiceServiceImpl.java</code> is
@@ -50,71 +52,46 @@ public class InvoiceServiceImpl implements InvoiceService {
 
 	@Inject
 	@Log
-	private Logger LOG;
+	private Logger log;
 
-	// Basic sales tax
-	private static final BigDecimal BASIC_SALES_TAX = new BigDecimal("10");
-	// Sales tax for import duty
-	private static final BigDecimal IMPORT_SALES_TAX = new BigDecimal("5");
-	// Scale to round up the sales tax
-	private static final BigDecimal ROUND_SCALE = new BigDecimal("0.05");
+	@Inject
+	private ProductService productService;
 
 	@Override
-	public Invoice calculateInvoice(List<Product> products) {
+	public Invoice calculateInvoice(List<Product> products) throws TaxyException {
 
-		LOG.debug("InvoiceService::calculateInvoice::start::products = {} ", products);
+		try {
+			log.debug("InvoiceService::calculateInvoice::start::products = {} ", products);
 
-		Invoice invoice = new Invoice();
-		List<Product> productsInvoiced = new ArrayList<>();
-		BigDecimal salesTax = new BigDecimal("0");
-		BigDecimal totalPrice = new BigDecimal("0");
+			Invoice invoice = new Invoice();
+			List<Product> productsInvoiced = new ArrayList<>();
+			BigDecimal salesTax = new BigDecimal("0");
+			BigDecimal totalPrice = new BigDecimal("0");
 
-		// Calculate sales tax for all products in shopping brackets
-		for (Product product : products) {
+			// Calculate sales tax for all products in shopping brackets
+			for (Product product : products) {
 
-			BigDecimal productFinalPrice;
+				// Calculate sales tax for single product
+				product = productService.calculateProductSalesTax(product);
 
-			if (!product.isImported() && product.getCategory().isTaxeable()) {
-				productFinalPrice = product.getPrice().add(calculateProductBasicSalesTax(product.getPrice()));
-			} else if (product.isImported() && product.getCategory().isTaxeable()) {
-				productFinalPrice = product.getPrice().add(
-					calculateProductBasicSalesTax(product.getPrice()).add(
-						calculateProductImportSalesTax(product.getPrice())));
-			} else if (product.isImported() && !product.getCategory().isTaxeable()) {
-				productFinalPrice = product.getPrice().add(calculateProductImportSalesTax(product.getPrice()));
-			} else {
-				productFinalPrice = product.getPrice();
+				salesTax = salesTax.add(product.getTaxedPrice().subtract(product.getPrice()));
+				totalPrice = totalPrice.add(product.getTaxedPrice());
+
+				product.setTaxedPrice(product.getTaxedPrice());
+				productsInvoiced.add(product);
 			}
 
-			salesTax = salesTax.add(productFinalPrice.subtract(product.getPrice()));
-			totalPrice = totalPrice.add(productFinalPrice);
+			// Set invoice attributes: products with taxed price, sales tax and
+			// total price
+			invoice.setProducts(productsInvoiced);
+			invoice.setSalesTax(salesTax);
+			invoice.setTotalPrice(totalPrice);
 
-			product.setTaxedPrice(productFinalPrice);
-			productsInvoiced.add(product);
+			log.debug("InvoiceService::calculateInvoice::end::invoice = {} ", invoice);
+			return invoice;
+		} catch (Exception e) {
+			throw new TaxyException("calculateInvoice", e);
 		}
-
-		// Set invoice attributes: products with taxed price, sales tax and
-		// total price
-		invoice.setProducts(productsInvoiced);
-		invoice.setSalesTax(salesTax);
-		invoice.setTotalPrice(totalPrice);
-
-		LOG.debug("InvoiceService::calculateInvoice::end::invoice = {} ", invoice);
-
-		return invoice;
 	}
 
-	@Override
-	public BigDecimal calculateProductBasicSalesTax(BigDecimal price) {
-		return roundSaleTax(price.divide(new BigDecimal(100)).multiply(BASIC_SALES_TAX));
-	}
-
-	@Override
-	public BigDecimal calculateProductImportSalesTax(BigDecimal price) {
-		return roundSaleTax(price.divide(new BigDecimal(100)).multiply(IMPORT_SALES_TAX));
-	}
-
-	protected BigDecimal roundSaleTax(BigDecimal price) {
-		return price.divide(ROUND_SCALE).setScale(0, BigDecimal.ROUND_UP).multiply(ROUND_SCALE);
-	}
 }

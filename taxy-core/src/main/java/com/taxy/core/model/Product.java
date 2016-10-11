@@ -1,5 +1,5 @@
 /*
- * @(#)Item.java        1.00	7 Oct 2016
+ * @(#)Product.java        1.00	7 Oct 2016
  *
  * Copyright (c) 2016 Michele Antonaci
  *
@@ -30,7 +30,7 @@ import javax.validation.constraints.NotNull;
 import com.taxy.core.model.enumeration.ProductCategory;
 
 /**
- * Class <code>Item.java</code> is
+ * Class <code>Product.java</code> is
  *
  * @author Michele Antonaci antonaci.michele@gmail.com
  * @version 1.00 7 Oct 2016

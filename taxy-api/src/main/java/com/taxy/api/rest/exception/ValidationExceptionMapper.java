@@ -50,11 +50,11 @@ public class ValidationExceptionMapper extends ResteasyViolationExceptionMapper 
 
 	@Inject
 	@Log
-	private Logger LOG;
+	private Logger log;
 
 	protected Response buildViolationReportResponse(ResteasyViolationException exception, Status status) {
 		
-		LOG.error("restapi:: status = {}, constraintViolationException :: {}", status.getStatusCode(), exception.getConstraintViolations());
+		log.error("restapi:: status = {}, constraintViolationException :: {}", status.getStatusCode(), exception.getConstraintViolations());
 
 		ViolationReport violationReport = new ViolationReport(exception);
 		TaxyApiViolation taxyApiViolation = new TaxyApiViolation();
