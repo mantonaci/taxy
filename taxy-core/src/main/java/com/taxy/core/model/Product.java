@@ -27,7 +27,7 @@ import java.math.BigDecimal;
 
 import javax.validation.constraints.NotNull;
 
-import com.taxy.core.enumeration.ProductCategory;
+import com.taxy.core.model.enumeration.ProductCategory;
 
 /**
  * Class <code>Item.java</code> is

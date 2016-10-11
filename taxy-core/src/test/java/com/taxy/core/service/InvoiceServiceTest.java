@@ -34,12 +34,11 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
-import com.taxy.core.enumeration.ProductCategory;
+import com.taxy.core.annotation.Log;
 import com.taxy.core.model.Product;
+import com.taxy.core.model.enumeration.ProductCategory;
 import com.taxy.core.runner.WeldJUnit4Runner;
-import com.taxy.core.service.InvoiceService;
 
 /**
  * Class <code>InvoiceServiceTest.java</code> is
@@ -50,10 +49,11 @@ import com.taxy.core.service.InvoiceService;
  */
 
 @RunWith(WeldJUnit4Runner.class)  
-public class InvoiceServiceImplTest {
+public class InvoiceServiceTest {
 
-	static final Logger LOG = LoggerFactory.getLogger(InvoiceServiceImplTest.class);
-
+	@Inject @Log
+	private Logger LOG;
+	
 	@Inject
 	InvoiceService invoiceService;
 

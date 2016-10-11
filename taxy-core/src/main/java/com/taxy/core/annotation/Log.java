@@ -1,5 +1,5 @@
 /*
- * @(#)JsonMappingExceptionMapper.java        1.00	8 Oct 2016
+ * @(#)Log.java        1.00	11 Oct 2016
  *
  * Copyright (c) 2016 Michele Antonaci
  *
@@ -21,39 +21,27 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package com.taxy.api.rest.exception;
+package com.taxy.core.annotation;
 
-import javax.inject.Inject;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
-import javax.ws.rs.core.Response.Status;
-import javax.ws.rs.ext.ExceptionMapper;
-import javax.ws.rs.ext.Provider;
+import java.lang.annotation.Retention;
+import java.lang.annotation.Target;
 
-import org.slf4j.Logger;
+import javax.inject.Qualifier;
 
-import com.fasterxml.jackson.databind.JsonMappingException;
-import com.taxy.core.annotation.Log;
+import static java.lang.annotation.ElementType.*;
+import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 /**
- * Class <code>JsonMappingExceptionMapper.java</code> is
+ * Class <code>Log.java</code> is
  *
  * @author Michele Antonaci antonaci.michele@gmail.com
- * @version 1.00 10 Oct 2016
+ * @version 1.00 11 Oct 2016
  *
  */
 
-@Provider
-public class JsonMappingExceptionMapper implements ExceptionMapper<JsonMappingException> {
+@Qualifier
+@Retention(RUNTIME)
+@Target({ FIELD, TYPE, METHOD })
+public @interface Log {
 
-	@Inject
-	@Log
-	private Logger LOG;
-
-	@Override
-	public Response toResponse(JsonMappingException jsonMappingException) {
-
-		LOG.error("restapi:: status = 400, jsonMappingException :: {}", jsonMappingException.getMessage());
-		return Response.status(Status.BAD_REQUEST).type(MediaType.APPLICATION_JSON).build();
-	}
 }

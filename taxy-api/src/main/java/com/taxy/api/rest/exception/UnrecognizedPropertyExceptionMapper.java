@@ -23,6 +23,7 @@
 
 package com.taxy.api.rest.exception;
 
+import javax.inject.Inject;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
@@ -30,9 +31,9 @@ import javax.ws.rs.ext.ExceptionMapper;
 import javax.ws.rs.ext.Provider;
 
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.fasterxml.jackson.databind.exc.UnrecognizedPropertyException;
+import com.taxy.core.annotation.Log;
 
 /**
  * Class <code>UnrecognizedPropertyExceptionMapper.java</code> is
@@ -45,12 +46,14 @@ import com.fasterxml.jackson.databind.exc.UnrecognizedPropertyException;
 @Provider
 public class UnrecognizedPropertyExceptionMapper implements ExceptionMapper<UnrecognizedPropertyException> {
 
-	private static final Logger LOG = LoggerFactory.getLogger(UnrecognizedPropertyExceptionMapper.class);
+	@Inject
+	@Log
+	private Logger LOG;
 
 	@Override
 	public Response toResponse(UnrecognizedPropertyException unrecognizedPropertyException) {
 
-		LOG.info("UnrecognizedPropertyExceptionHandler :: {}", unrecognizedPropertyException.getMessage());
+		LOG.error("restapi:: status = 400, unrecognizedPropertyExceptionHandler = {}", unrecognizedPropertyException.getMessage());
 		return Response.status(Status.BAD_REQUEST).type(MediaType.APPLICATION_JSON).build();
 	}
 }

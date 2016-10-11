@@ -1,5 +1,5 @@
 /*
- * @(#)JsonMappingExceptionMapper.java        1.00	8 Oct 2016
+ *@(#)LogProducer.java        1.00	11 Oct 2016
  *
  * Copyright (c) 2016 Michele Antonaci
  *
@@ -21,39 +21,29 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package com.taxy.api.rest.exception;
+package com.taxy.core.producer;
 
-import javax.inject.Inject;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
-import javax.ws.rs.core.Response.Status;
-import javax.ws.rs.ext.ExceptionMapper;
-import javax.ws.rs.ext.Provider;
+import javax.enterprise.inject.Produces;
+import javax.enterprise.inject.spi.InjectionPoint;
 
 import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-import com.fasterxml.jackson.databind.JsonMappingException;
 import com.taxy.core.annotation.Log;
 
 /**
- * Class <code>JsonMappingExceptionMapper.java</code> is
+ * Class <code>LogProducer.java</code> is
  *
  * @author Michele Antonaci antonaci.michele@gmail.com
- * @version 1.00 10 Oct 2016
+ * @version 1.00 11 Oct 2016
  *
  */
 
-@Provider
-public class JsonMappingExceptionMapper implements ExceptionMapper<JsonMappingException> {
+public class LogProducer {
 
-	@Inject
+	@Produces
 	@Log
-	private Logger LOG;
-
-	@Override
-	public Response toResponse(JsonMappingException jsonMappingException) {
-
-		LOG.error("restapi:: status = 400, jsonMappingException :: {}", jsonMappingException.getMessage());
-		return Response.status(Status.BAD_REQUEST).type(MediaType.APPLICATION_JSON).build();
+	private Logger createLogger(InjectionPoint injectionPoint) {
+		return LoggerFactory.getLogger(injectionPoint.getMember().getDeclaringClass().getName());
 	}
 }

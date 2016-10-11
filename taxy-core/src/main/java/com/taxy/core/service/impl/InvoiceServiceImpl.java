@@ -28,7 +28,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.Stateless;
+import javax.inject.Inject;
 
+import org.slf4j.Logger;
+
+import com.taxy.core.annotation.Log;
 import com.taxy.core.model.Invoice;
 import com.taxy.core.model.Product;
 import com.taxy.core.service.InvoiceService;
@@ -43,23 +47,29 @@ import com.taxy.core.service.InvoiceService;
 
 @Stateless
 public class InvoiceServiceImpl implements InvoiceService {
-    
-	//Basic sales tax
+
+	@Inject
+	@Log
+	private Logger LOG;
+
+	// Basic sales tax
 	private static final BigDecimal BASIC_SALES_TAX = new BigDecimal("10");
-	//Sales tax for import duty
+	// Sales tax for import duty
 	private static final BigDecimal IMPORT_SALES_TAX = new BigDecimal("5");
-	//Scale to round up the sales tax
+	// Scale to round up the sales tax
 	private static final BigDecimal ROUND_SCALE = new BigDecimal("0.05");
-	
+
 	@Override
 	public Invoice calculateInvoice(List<Product> products) {
+
+		LOG.debug("InvoiceService::calculateInvoice::start::products = {} ", products);
 
 		Invoice invoice = new Invoice();
 		List<Product> productsInvoiced = new ArrayList<>();
 		BigDecimal salesTax = new BigDecimal("0");
 		BigDecimal totalPrice = new BigDecimal("0");
-		
-		//Calculate sales tax for all products in shopping brackets
+
+		// Calculate sales tax for all products in shopping brackets
 		for (Product product : products) {
 
 			BigDecimal productFinalPrice;
@@ -82,11 +92,14 @@ public class InvoiceServiceImpl implements InvoiceService {
 			product.setTaxedPrice(productFinalPrice);
 			productsInvoiced.add(product);
 		}
-		
-		//Set invoice attributes: products with taxed price, sales tax and total price
+
+		// Set invoice attributes: products with taxed price, sales tax and
+		// total price
 		invoice.setProducts(productsInvoiced);
 		invoice.setSalesTax(salesTax);
 		invoice.setTotalPrice(totalPrice);
+
+		LOG.debug("InvoiceService::calculateInvoice::end::invoice = {} ", invoice);
 
 		return invoice;
 	}

@@ -23,6 +23,7 @@
 
 package com.taxy.api.rest.exception;
 
+import javax.inject.Inject;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
@@ -32,9 +33,9 @@ import org.jboss.resteasy.api.validation.ResteasyViolationException;
 import org.jboss.resteasy.api.validation.ResteasyViolationExceptionMapper;
 import org.jboss.resteasy.api.validation.ViolationReport;
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.taxy.api.rest.violation.TaxyApiViolation;
+import com.taxy.core.annotation.Log;
 
 /**
  * Class <code>ValidationExceptionMapper.java</code> is
@@ -47,14 +48,17 @@ import com.taxy.api.rest.violation.TaxyApiViolation;
 @Provider
 public class ValidationExceptionMapper extends ResteasyViolationExceptionMapper {
 
-	private static final Logger LOG = LoggerFactory.getLogger(ValidationExceptionMapper.class);
+	@Inject
+	@Log
+	private Logger LOG;
 
 	protected Response buildViolationReportResponse(ResteasyViolationException exception, Status status) {
-		LOG.error("ConstraintViolationException :: {}", exception.getConstraintViolations());
+		
+		LOG.error("restapi:: status = {}, constraintViolationException :: {}", status.getStatusCode(), exception.getConstraintViolations());
 
 		ViolationReport violationReport = new ViolationReport(exception);
 		TaxyApiViolation taxyApiViolation = new TaxyApiViolation();
-		taxyApiViolation.setCode(400);
+		taxyApiViolation.setCode(status.getStatusCode());
 		taxyApiViolation.setMessage(violationReport.getParameterViolations());
 
 		return Response.status(status).type(MediaType.APPLICATION_JSON).entity(taxyApiViolation).build();

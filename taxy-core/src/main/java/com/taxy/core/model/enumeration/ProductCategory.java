@@ -21,7 +21,7 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package com.taxy.core.enumeration;
+package com.taxy.core.model.enumeration;
 
 /**
  * Class <code>ProductCategory.java</code> is
