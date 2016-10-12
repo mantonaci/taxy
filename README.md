@@ -149,23 +149,6 @@ OUTPUT
   "totalPrice": 74.68
 }
 ```
-
-Also you can calculate sales taxt for a single product:
-
-```
-curl -H "Content-Type: application/json" -X POST -d '{"title":"D&G","price":27.99,"category":"PERFUME","imported":true}' http://localhost:8080/taxy/api/product
-
-OUTPUT
-
-{
-  "title": "D&G",
-  "price": 27.99,
-  "taxedPrice": 32.19,
-  "category": "PERFUME",
-  "imported": true
-}
-```
-
 Enjoy!
 
 
