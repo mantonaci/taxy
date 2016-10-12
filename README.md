@@ -33,7 +33,7 @@ Execute ```mvn test``` and check logs to verify test cases in [Sales taxes probl
 
 ### <a name='rest-api'>Rest API<a/>
 
-Alternative you can verify the test cases via REST API. Go into taxy-core module and execute this command ```mvn wildfly:run``` to start application server by **wildfly-maven-plugin**.
+Alternative you can verify the test cases via REST API. Go into taxy-api module and execute this command ```mvn wildfly:run``` to start application server by **wildfly-maven-plugin** or compile project with ```mvn package``` and install ```taxy.war``` in existing WildFly server.
 
 ```maven
 <plugins>
