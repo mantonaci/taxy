@@ -23,7 +23,7 @@ Taxy requires JDK 7 or higher.
 
 ## <a name='Documentation'>Documentation<a/>
 
-You can verify [Sales taxes problem](https://github.com/xpeppers/sales-taxes-problem) in two wayes: TEST and REST API.
+You can verify [Sales taxes problem](https://github.com/xpeppers/sales-taxes-problem) by [Test](#Test) or [Rest API](#rest-api).
 
 Before start you should execute ```mvn clean install``` in root project.
 
