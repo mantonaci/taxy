@@ -1,5 +1,5 @@
 /*
- * @(#)ProductRestService.java        1.00	11 Oct 2016
+ * @(#)Receipt.java        1.00	7 Oct 2016
  *
  * Copyright (c) 2016 Michele Antonaci
  *
@@ -21,38 +21,59 @@
  * CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
-package com.taxy.api.rest.service;
+package com.taxy.core.model;
 
-import javax.inject.Inject;
-import javax.validation.Valid;
-import javax.ws.rs.Consumes;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-
-import com.taxy.core.exception.TaxyException;
-import com.taxy.core.model.Product;
-import com.taxy.core.service.ProductService;
+import java.math.BigDecimal;
+import java.util.List;
 
 /**
- * Class <code>ProductRestService.java</code> is
+ * Class <code>Receipt.java</code> is
  *
  * @author Michele Antonaci antonaci.michele@gmail.com
- * @version 1.00 11 Oct 2016
+ * @version 1.00 7 Oct 2016
  *
  */
 
-@Consumes("application/json")
-@Produces("application/json")
-@Path("/api")
-public class ProductRestService {
+public class Receipt {
 
-	@Inject
-	private ProductService productService;
+	private List<Product> products;
+	private BigDecimal salesTax;
+	private BigDecimal totalPrice;
 
-	@POST
-	@Path("/product")
-	public Product create(@Valid Product product) throws TaxyException {
-		return productService.calculateProductSalesTax(product);
+	public List<Product> getProducts() {
+		return products;
+	}
+
+	public void setProducts(List<Product> products) {
+		this.products = products;
+	}
+
+	public BigDecimal getSalesTax() {
+		return salesTax;
+	}
+
+	public void setSalesTax(BigDecimal salesTax) {
+		this.salesTax = salesTax;
+	}
+
+	public BigDecimal getTotalPrice() {
+		return totalPrice;
+	}
+
+	public void setTotalPrice(BigDecimal totalPrice) {
+		this.totalPrice = totalPrice;
+	}
+
+	@Override
+	public String toString() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("receipt [products=");
+		builder.append(products);
+		builder.append(", salesTax=");
+		builder.append(salesTax);
+		builder.append(", totalPrice=");
+		builder.append(totalPrice);
+		builder.append("]");
+		return builder.toString();
 	}
 }

@@ -1,5 +1,5 @@
 /*
- * @(#)InvoiceRestService.java        1.00	8 Oct 2016
+ * @(#)ReceiptRestService.java        1.00	8 Oct 2016
  *
  * Copyright (c) 2016 Michele Antonaci
  *
@@ -33,12 +33,12 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 
 import com.taxy.core.exception.TaxyException;
-import com.taxy.core.model.Invoice;
 import com.taxy.core.model.Product;
-import com.taxy.core.service.InvoiceService;
+import com.taxy.core.model.Receipt;
+import com.taxy.core.service.ReceiptService;
 
 /**
- * Class <code>InvoiceRestService.java</code> is
+ * Class <code>ReceiptRestService.java</code> is
  *
  * @author Michele Antonaci antonaci.michele@gmail.com
  * @version 1.00 8 Oct 2016
@@ -48,14 +48,14 @@ import com.taxy.core.service.InvoiceService;
 @Consumes("application/json")
 @Produces("application/json")
 @Path("/api")
-public class InvoiceRestService {
+public class ReceiptRestService {
 
 	@Inject
-	InvoiceService invoiceService;
+	ReceiptService receiptService;
 
 	@POST
-	@Path("/invoice")
-	public Invoice create(@Valid List<Product> products) throws TaxyException {
-		return invoiceService.calculateInvoice(products);
+	@Path("/receipt")
+	public Receipt create(@Valid List<Product> products) throws TaxyException {
+		return receiptService.calculateReceipt(products);
 	}
 }

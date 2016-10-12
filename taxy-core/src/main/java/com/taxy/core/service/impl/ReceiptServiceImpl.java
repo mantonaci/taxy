@@ -1,5 +1,5 @@
 /*
- * @(#)InvoiceServiceImpl.java        1.00	7 Oct 2016
+ * @(#)ReceiptServiceImpl.java        1.00	7 Oct 2016
  *
  * Copyright (c) 2016 Michele Antonaci
  *
@@ -34,13 +34,13 @@ import org.slf4j.Logger;
 
 import com.taxy.core.annotation.Log;
 import com.taxy.core.exception.TaxyException;
-import com.taxy.core.model.Invoice;
+import com.taxy.core.model.Receipt;
 import com.taxy.core.model.Product;
-import com.taxy.core.service.InvoiceService;
+import com.taxy.core.service.ReceiptService;
 import com.taxy.core.service.ProductService;
 
 /**
- * Class <code>InvoiceServiceImpl.java</code> is
+ * Class <code>ReceiptServiceImpl.java</code> is
  *
  * @author Michele Antonaci antonaci.michele@gmail.com
  * @version 1.00 7 Oct 2016
@@ -48,7 +48,7 @@ import com.taxy.core.service.ProductService;
  */
 
 @Stateless
-public class InvoiceServiceImpl implements InvoiceService {
+public class ReceiptServiceImpl implements ReceiptService {
 
 	@Inject
 	@Log
@@ -58,13 +58,13 @@ public class InvoiceServiceImpl implements InvoiceService {
 	private ProductService productService;
 
 	@Override
-	public Invoice calculateInvoice(List<Product> products) throws TaxyException {
+	public Receipt calculateReceipt(List<Product> products) throws TaxyException {
 
 		try {
-			log.debug("InvoiceService::calculateInvoice::start::products = {} ", products);
+			log.debug("receiptService::calculateReceipt::start::products = {} ", products);
 
-			Invoice invoice = new Invoice();
-			List<Product> productsInvoiced = new ArrayList<>();
+			Receipt receipt = new Receipt();
+			List<Product> productTaxed = new ArrayList<>();
 			BigDecimal salesTax = new BigDecimal("0");
 			BigDecimal totalPrice = new BigDecimal("0");
 
@@ -78,19 +78,19 @@ public class InvoiceServiceImpl implements InvoiceService {
 				totalPrice = totalPrice.add(product.getTaxedPrice());
 
 				product.setTaxedPrice(product.getTaxedPrice());
-				productsInvoiced.add(product);
+				productTaxed.add(product);
 			}
 
-			// Set invoice attributes: products with taxed price, sales tax and
+			// Set receipt attributes: products with taxed price, sales tax and
 			// total price
-			invoice.setProducts(productsInvoiced);
-			invoice.setSalesTax(salesTax);
-			invoice.setTotalPrice(totalPrice);
+			receipt.setProducts(productTaxed);
+			receipt.setSalesTax(salesTax);
+			receipt.setTotalPrice(totalPrice);
 
-			log.debug("InvoiceService::calculateInvoice::end::invoice = {} ", invoice);
-			return invoice;
+			log.debug("ReceiptService::calculateReceipt::end::receipt = {} ", receipt);
+			return receipt;
 		} catch (Exception e) {
-			throw new TaxyException("calculateInvoice", e);
+			throw new TaxyException("calculateReceipt", e);
 		}
 	}
 

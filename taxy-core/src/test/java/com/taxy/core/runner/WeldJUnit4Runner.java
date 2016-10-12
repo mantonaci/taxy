@@ -1,5 +1,5 @@
 /*
- * @(#)InvoiceRestService.java        1.00	8 Oct 2016
+ * @(#)WeldJUnit4Runner.java        1.00	8 Oct 2016
  *
  * Copyright (c) 2016 Michele Antonaci
  *

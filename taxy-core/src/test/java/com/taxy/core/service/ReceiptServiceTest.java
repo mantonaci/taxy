@@ -1,6 +1,6 @@
 /*
- * @(#)InvoiceServiceTest.java        1.00	8 Oct 2016
- *
+ * @(#)ReceiptServiceTest.java        1.00	8 Oct 2016
+ * 
  * Copyright (c) 2016 Michele Antonaci
  *
  * Permission is hereby granted, free of charge, to any person obtaining 
@@ -37,12 +37,13 @@ import org.slf4j.Logger;
 
 import com.taxy.core.annotation.Log;
 import com.taxy.core.exception.TaxyException;
+import com.taxy.core.model.Receipt;
 import com.taxy.core.model.Product;
 import com.taxy.core.model.enumeration.ProductCategory;
 import com.taxy.core.runner.WeldJUnit4Runner;
 
 /**
- * Class <code>InvoiceServiceTest.java</code> is
+ * Class <code>ReceiptServiceTest.java</code> is
  *
  * @author Michele Antonaci antonaci.michele@gmail.com
  * @version 1.00 8 Oct 2016
@@ -50,13 +51,13 @@ import com.taxy.core.runner.WeldJUnit4Runner;
  */
 
 @RunWith(WeldJUnit4Runner.class)  
-public class InvoiceServiceTest {
+public class ReceiptServiceTest {
 
 	@Inject @Log
 	private Logger log;
 	
 	@Inject
-	InvoiceService invoiceService;
+	ReceiptService receiptService;
 
 	private List<Product> shoppingBaskets1 = new ArrayList<>();
 	private List<Product> shoppingBaskets2 = new ArrayList<>();
@@ -66,7 +67,7 @@ public class InvoiceServiceTest {
 	public void init() {
 
 		// SHOPPING BASKETS 1
-		shoppingBaskets1.add(new Product("Crypto", null, new BigDecimal("0"), ProductCategory.BOOK, false));
+		shoppingBaskets1.add(new Product("Crypto", new BigDecimal("12.49"), new BigDecimal("0"), ProductCategory.BOOK, false));
 		shoppingBaskets1.add(new Product("Mumford & Sons CD", new BigDecimal("14.99"), new BigDecimal("0"), ProductCategory.MUSIC, false));
 		shoppingBaskets1.add(new Product("Ferrero chocolate", new BigDecimal("0.85"), new BigDecimal("0"), ProductCategory.FOOD, false));
 
@@ -82,24 +83,42 @@ public class InvoiceServiceTest {
 	}
 
 	@Test
-	public void calculateInvoiceTest() {
+	public void calculateReceiptTest() {
 		
 		try {
 			
-			// Calculate invoice for shopping baskets 1
+			Receipt receipt;
+			
+			// Calculate receipt for shopping baskets 1
 			Assert.assertTrue("Shopping Baskets 1 is empty", !shoppingBaskets1.isEmpty());
-			log.info("SHOPPING BASKET 1 :: {}", invoiceService.calculateInvoice(shoppingBaskets1));
+			
+			receipt = receiptService.calculateReceipt(shoppingBaskets1);
+			log.info("SHOPPING BASKET 1::RECEIPT");
+			log.info("products: {}", receipt.getProducts());
+			log.info("salesTax: {}", receipt.getSalesTax());
+			log.info("totalPrice: {}", receipt.getTotalPrice());
 
-			// Calculate invoice for shopping baskets 2
+			// Calculate receipt for shopping baskets 2
 			Assert.assertTrue("Shopping Baskets 2 is empty", !shoppingBaskets2.isEmpty());
-			log.info("SHOPPING BASKET 2 :: {}", invoiceService.calculateInvoice(shoppingBaskets2));
 
-			// Calculate invoice for shopping baskets 3
+			receipt = receiptService.calculateReceipt(shoppingBaskets2);
+			log.info("SHOPPING BASKET 2::RECEIPT");
+			log.info("products: {}", receipt.getProducts());
+			log.info("salesTax: {}", receipt.getSalesTax());
+			log.info("totalPrice: {}", receipt.getTotalPrice());
+
+			// Calculate receipt for shopping baskets 3
 			Assert.assertTrue("Shopping Baskets 3 is empty", !shoppingBaskets3.isEmpty());
-			log.info("SHOPPING BASKET 3 :: {}", invoiceService.calculateInvoice(shoppingBaskets3));
+			
+			receipt = receiptService.calculateReceipt(shoppingBaskets3);
+			log.info("SHOPPING BASKET 3::RECEIPT");
+			log.info("products:{}", receipt.getProducts());
+			log.info("salesTax: {}", receipt.getSalesTax());
+			log.info("totalPrice: {}", receipt.getTotalPrice());
+
 			
 		} catch (TaxyException e) {
-			log.error("calculateInvoiceTest", e);
+			log.error("calculateReceiptTest", e);
 		}
 	}
 }

@@ -18,7 +18,7 @@
 		<resteasy-jaxrs.version>3.0.19.Final</resteasy-jaxrs.version>
 		<resteasy-validator-provider-11.version>3.0.19.Final</resteasy-validator-provider-11.version>
 		<javaee-api.version>7.0</javaee-api.version>
-		<jackson-databind.version>2.3.2</jackson-databind.version>
+		<jackson-databind.version>2.4.5</jackson-databind.version>
 		<junit.version>4.12</junit.version>
 		<logback-classic.version>1.1.7</logback-classic.version>
 		<weld-se-core.version>2.4.0.Final</weld-se-core.version>

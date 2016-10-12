@@ -1,5 +1,5 @@
 /*
- * @(#)InvoiceService.java        1.00	7 Oct 2016
+ * @(#)ReceiptService.java        1.00	7 Oct 2016
  *
  * Copyright 2016 Michele Antonaci
  *
@@ -21,26 +21,26 @@ package com.taxy.core.service;
 import java.util.List;
 
 import com.taxy.core.exception.TaxyException;
-import com.taxy.core.model.Invoice;
+import com.taxy.core.model.Receipt;
 import com.taxy.core.model.Product;
 
 /**
- * Class <code>InvoiceService.java</code> is
+ * Class <code>ReceiptService.java</code> is
  *
  * @author Michele Antonaci antonaci.michele@gmail.com
  * @version 1.00 7 Oct 2016
  *
  */
 
-public interface InvoiceService {
+public interface ReceiptService {
 
 	/**
-	 * Calculate invoice for shopping brackets
+	 * Calculate receipt for shopping brackets
 	 * 
 	 * @param products
-	 * @return invoice with sales tax and total price
-	 *         {@link com.taxy.core.model.Invoice}
+	 * @return receipt with sales tax and total price
+	 *         {@link com.taxy.core.model.Receipt}
 	 */
-	public Invoice calculateInvoice(List<Product> products) throws TaxyException;
+	public Receipt calculateReceipt(List<Product> products) throws TaxyException;
 
 }

@@ -33,7 +33,7 @@ package com.taxy.core.model.enumeration;
 
 public enum ProductCategory {
 
-	BOOK(false), FOOD(false), MEDICAL(false), MUSIC(true), PERFUME(true);
+	BOOK(false), FOOD(false), MEDICAL(false), MUSIC(true), PERFUME(true), OTHERS(true);
 
 	private final boolean taxeable;
 

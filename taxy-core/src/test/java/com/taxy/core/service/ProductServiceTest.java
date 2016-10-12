@@ -72,7 +72,7 @@ public class ProductServiceTest {
 		try {
 			productService.calculateProductSalesTax(product);
 		} catch (TaxyException e) {
-			log.error("calculateInvoiceTest", e);
+			log.error("calculateProductSalesTax", e);
 		}
 	}
 

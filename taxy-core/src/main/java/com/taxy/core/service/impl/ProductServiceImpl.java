@@ -72,7 +72,7 @@ public class ProductServiceImpl implements ProductService {
 				product.setTaxedPrice(product.getPrice());
 			}
 
-			log.debug("InvoiceService::calculateProductSalesTax::end::product = {} ", product);
+			log.debug("ReceiptService::calculateProductSalesTax::end::product = {} ", product);
 			return product;
 		} catch (Exception e) {
 			throw new TaxyException("calculateProductSalesTax", e);

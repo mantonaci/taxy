@@ -1,5 +1,5 @@
 /*
- * Copyright 2016 Michele Antonaci
+ * @(#)TaxyApiViolation.java        1.00	11 Oct 2016
  *
  * Copyright (c) 2016 Michele Antonaci
  *
