@@ -43,7 +43,7 @@ Alternative you can verify the test cases via REST API. Go into taxy-api module 
   </plugin>
 </plugins>
 ```
-Use rest client or ```curl``` to call APIs. Below, **TEST CASES** verification with ```curl```:
+Use [Rest Client](https://www.getpostman.com) or ```curl``` to call APIs. Below, **TEST CASES** verification with ```curl```:
 
 **TEST CASE 1**
 ```
