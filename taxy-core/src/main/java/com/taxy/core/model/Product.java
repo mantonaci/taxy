@@ -46,7 +46,7 @@ public class Product {
 	@NotNull
 	private ProductCategory category;
 	@NotNull
-	private boolean imported;
+	private Boolean imported;
 
 	public Product() {
 	}
@@ -91,7 +91,7 @@ public class Product {
 		this.category = category;
 	}
 
-	public boolean isImported() {
+	public Boolean isImported() {
 		return imported;
 	}
 
