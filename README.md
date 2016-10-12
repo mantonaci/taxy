@@ -33,7 +33,7 @@ Execute ```mvn test``` and check logs to verify test cases in [Sales taxes probl
 
 ### <a name='rest-api'>Rest API<a/>
 
-Alternative you can verify the test cases via REST API. Go into taxy-api module and execute this command ```mvn wildfly:run``` to start application server by **wildfly-maven-plugin** or compile project with ```mvn package``` and install ```taxy.war``` in existing WildFly server.
+Alternative you can verify test cases via REST API. Go into taxy-api module and execute this command ```mvn wildfly:run``` to start application server by **wildfly-maven-plugin** or compile project with ```mvn package``` and install ```taxy.war``` in existing WildFly server.
 
 ```maven
 <plugins>
@@ -47,7 +47,7 @@ Use [Rest Client](https://www.getpostman.com) or ```curl``` to call APIs. Below,
 
 **TEST CASE 1**
 ```
-curl -H "Content-Type: application/json" -X POST -d '[{"title":"Crypto","price":12.49,"category":"BOOK","imported": false},{"title": "Mumford & Sons CD","price":14.99,"category":"MUSIC","imported":false},{"title":"Ferrero chocolate","price": 0.85,"category":"FOOD", "imported":false}]' http://localhost:8080/taxy/api/invoice
+curl -H "Content-Type: application/json" -X POST -d '[{"title":"Crypto","price":12.49,"category":"BOOK","imported": false},{"title": "Mumford & Sons CD","price":14.99,"category":"MUSIC","imported":false},{"title":"Ferrero chocolate","price": 0.85,"category":"FOOD", "imported":false}]' http://localhost:8080/taxy/api/receipt
 ```
 ```
 OUTPUT
@@ -83,7 +83,7 @@ OUTPUT
 
 **TEST CASE 2**
 ```
-curl -H "Content-Type: application/json" -X POST -d '[{"title":"Perugina box chocolates","price":10,"category":"FOOD","imported":true},{"title":"One million","price":47.5,"category":"PERFUME","imported":true}]' http://localhost:8080/taxy/api/invoice
+curl -H "Content-Type: application/json" -X POST -d '[{"title":"Perugina box chocolates","price":10,"category":"FOOD","imported":true},{"title":"One million","price":47.5,"category":"PERFUME","imported":true}]' http://localhost:8080/taxy/api/receipt
 ```
 ```
 OUTPUT
@@ -112,7 +112,7 @@ OUTPUT
 
 **TEST CASE 3**
 ```
-curl -H "Content-Type: application/json" -X POST -d '[{"title":"D&G","price":27.99,"category":"PERFUME","imported":true},{"title":"Ugo Boss","price":18.99,"category":"PERFUME","imported":false},{"title":"Aulin","price":9.75,"category":"MEDICAL","imported":false},{"title":"Novi chocolate","price":11.25,"category":"FOOD","imported":true}]' http://localhost:8080/taxy/api/invoice
+curl -H "Content-Type: application/json" -X POST -d '[{"title":"D&G","price":27.99,"category":"PERFUME","imported":true},{"title":"Ugo Boss","price":18.99,"category":"PERFUME","imported":false},{"title":"Aulin","price":9.75,"category":"MEDICAL","imported":false},{"title":"Novi chocolate","price":11.25,"category":"FOOD","imported":true}]' http://localhost:8080/taxy/api/receipt
 ```
 ```
 OUTPUT
