@@ -43,7 +43,7 @@
 
 		<!-- taxy lib -->
 		<dependency>
-			<groupId>it.xpeppers.taxy</groupId>
+			<groupId>com.taxy</groupId>
 			<artifactId>taxy-core</artifactId>
 		</dependency>
 	</dependencies>
